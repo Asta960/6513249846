@@ -18,20 +18,23 @@
             --success: #4CAF50;
             --shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
             --vk-blue: #5181b8;
+            --vk-blue-dark: #45688e;
         }
 
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
+            -webkit-tap-highlight-color: transparent;
         }
 
         body {
-            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
             background-color: var(--bg-light);
             color: var(--text-light);
             line-height: 1.6;
             transition: background-color 0.3s, color 0.3s;
+            overflow-x: hidden;
         }
 
         body.dark-mode {
@@ -42,54 +45,51 @@
         #app {
             max-width: 550px;
             margin: 0 auto;
-            padding: 20px;
+            padding: 0 0 80px;
             min-height: 100vh;
             display: flex;
             flex-direction: column;
         }
 
         .vk-header {
-            background-color: var(--vk-blue);
+            background: linear-gradient(135deg, var(--vk-blue), var(--vk-blue-dark));
             color: white;
-            padding: 15px;
+            padding: 15px 20px;
             text-align: center;
-            border-radius: 12px 12px 0 0;
-            margin-bottom: 10px;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
         }
 
-        /* Заголовок и навигация */
         .header {
             display: flex;
             justify-content: space-between;
             align-items: center;
-            margin-bottom: 20px;
-            padding-bottom: 15px;
-            border-bottom: 1px solid rgba(0, 0, 0, 0.1);
-        }
-
-        .dark-mode .header {
-            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            margin-bottom: 10px;
         }
 
         .app-title {
-            font-size: 1.8rem;
+            font-size: 1.6rem;
             font-weight: 700;
-            color: white;
+            display: flex;
+            align-items: center;
+            gap: 8px;
         }
 
         .header-actions {
             display: flex;
-            gap: 15px;
+            gap: 12px;
             align-items: center;
         }
 
         .theme-toggle {
-            background: none;
+            background: rgba(255, 255, 255, 0.2);
             border: none;
-            font-size: 1.8rem;
+            font-size: 1.5rem;
             cursor: pointer;
-            width: 45px;
-            height: 45px;
+            width: 40px;
+            height: 40px;
             display: flex;
             align-items: center;
             justify-content: center;
@@ -99,16 +99,15 @@
         }
 
         .theme-toggle:hover {
-            background: rgba(255, 255, 255, 0.1);
+            background: rgba(255, 255, 255, 0.3);
         }
 
-        /* Основной контейнер */
         .app-box {
             background: var(--box-light);
-            border-radius: 12px;
+            border-radius: 16px;
             padding: 20px;
             box-shadow: var(--shadow);
-            margin-bottom: 20px;
+            margin: 15px;
             transition: background-color 0.3s, box-shadow 0.3s;
             flex-grow: 1;
         }
@@ -118,22 +117,24 @@
             box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
         }
 
-        /* Форма добавления задачи */
         .todo-form {
             display: flex;
             gap: 10px;
             margin-bottom: 25px;
+            flex-wrap: wrap;
         }
 
         .todo-input {
-            flex-grow: 1;
-            padding: 12px 15px;
+            flex: 1;
+            min-width: 200px;
+            padding: 14px 16px;
             border: 1px solid #ddd;
-            border-radius: 8px;
+            border-radius: 10px;
             font-size: 1rem;
             background: transparent;
             color: inherit;
             transition: border-color 0.3s;
+            font-family: inherit;
         }
 
         .dark-mode .todo-input {
@@ -142,18 +143,19 @@
 
         .todo-input:focus {
             outline: none;
-            border-color: var(--primary);
-            box-shadow: 0 0 0 2px rgba(74, 118, 168, 0.2);
+            border-color: var(--vk-blue);
+            box-shadow: 0 0 0 2px rgba(81, 129, 184, 0.2);
         }
 
         .category-select {
-            padding: 12px 10px;
+            padding: 14px 12px;
             border: 1px solid #ddd;
-            border-radius: 8px;
+            border-radius: 10px;
             background: transparent;
             color: inherit;
-            min-width: 110px;
+            min-width: 120px;
             cursor: pointer;
+            font-family: inherit;
         }
 
         .dark-mode .category-select {
@@ -161,47 +163,49 @@
         }
 
         .add-button {
-            padding: 12px 20px;
+            padding: 14px 24px;
             background: var(--vk-blue);
             color: white;
             border: none;
-            border-radius: 8px;
+            border-radius: 10px;
             font-weight: 600;
             cursor: pointer;
             transition: background 0.2s, transform 0.1s;
+            font-family: inherit;
+            flex: 1;
         }
 
         .add-button:hover {
-            background: #3a6590;
+            background: var(--vk-blue-dark);
         }
 
         .add-button:active {
             transform: scale(0.98);
         }
 
-        /* Продуктивность */
         .productivity-container {
-            background: rgba(74, 118, 168, 0.1);
-            border-radius: 10px;
-            padding: 15px;
+            background: rgba(81, 129, 184, 0.1);
+            border-radius: 12px;
+            padding: 18px;
             margin-bottom: 25px;
         }
 
         .dark-mode .productivity-container {
-            background: rgba(74, 118, 168, 0.15);
+            background: rgba(81, 129, 184, 0.15);
         }
 
         .productivity-header {
             display: flex;
             justify-content: space-between;
             align-items: center;
-            margin-bottom: 10px;
+            margin-bottom: 12px;
+            font-weight: 500;
         }
 
         .streak {
             display: flex;
             align-items: center;
-            gap: 5px;
+            gap: 6px;
             font-weight: 700;
             font-size: 1.1rem;
         }
@@ -211,13 +215,13 @@
         }
 
         .progress-container {
-            margin-top: 10px;
+            margin-top: 15px;
         }
 
         .progress-bar {
-            height: 24px;
+            height: 28px;
             background: #e0e0e0;
-            border-radius: 12px;
+            border-radius: 14px;
             overflow: hidden;
             position: relative;
         }
@@ -228,7 +232,7 @@
 
         .progress-fill {
             height: 100%;
-            background: linear-gradient(90deg, var(--vk-blue), #6a9bd8);
+            background: linear-gradient(90deg, var(--vk-blue), var(--vk-blue-dark));
             transition: width 0.5s ease;
         }
 
@@ -241,11 +245,12 @@
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 0.9rem;
+            font-size: 0.95rem;
             font-weight: 600;
+            color: white;
+            text-shadow: 0 1px 2px rgba(0,0,0,0.2);
         }
 
-        /* Фильтр категорий */
         .categories-filter {
             display: flex;
             flex-wrap: wrap;
@@ -254,13 +259,14 @@
         }
 
         .category-button {
-            padding: 8px 15px;
+            padding: 10px 18px;
             border: none;
-            border-radius: 20px;
+            border-radius: 24px;
             background: #f0f0f0;
             cursor: pointer;
-            font-size: 0.9rem;
+            font-size: 0.95rem;
             transition: all 0.2s;
+            font-weight: 500;
         }
 
         .dark-mode .category-button {
@@ -270,22 +276,21 @@
 
         .category-button.active {
             transform: scale(1.05);
-            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+            box-shadow: 0 3px 10px rgba(0, 0, 0, 0.15);
             font-weight: 600;
         }
 
-        /* Список задач */
         .todos-container {
             display: flex;
             flex-direction: column;
-            gap: 10px;
+            gap: 12px;
         }
 
         .todo-item {
             display: flex;
             align-items: center;
-            padding: 12px 15px;
-            border-radius: 8px;
+            padding: 16px 18px;
+            border-radius: 12px;
             background: rgba(0, 0, 0, 0.03);
             transition: all 0.2s;
             position: relative;
@@ -297,7 +302,8 @@
         }
 
         .todo-item:hover {
-            background: rgba(0, 0, 0, 0.06);
+            transform: translateY(-2px);
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.05);
         }
 
         .dark-mode .todo-item:hover {
@@ -313,25 +319,28 @@
             left: 0;
             top: 0;
             bottom: 0;
-            width: 6px;
+            width: 8px;
+            border-radius: 8px 0 0 8px;
         }
 
         .todo-content {
             display: flex;
             align-items: center;
             flex-grow: 1;
-            gap: 12px;
+            gap: 14px;
         }
 
         .todo-checkbox {
-            width: 20px;
-            height: 20px;
+            width: 22px;
+            height: 22px;
             cursor: pointer;
+            accent-color: var(--vk-blue);
         }
 
         .todo-text {
             flex-grow: 1;
             word-break: break-word;
+            font-size: 1.05rem;
         }
 
         .todo-item.completed .todo-text {
@@ -339,11 +348,12 @@
         }
 
         .category-label {
-            padding: 4px 10px;
-            border-radius: 12px;
-            font-size: 0.8rem;
+            padding: 5px 12px;
+            border-radius: 14px;
+            font-size: 0.85rem;
             background: rgba(0, 0, 0, 0.08);
             white-space: nowrap;
+            font-weight: 500;
         }
 
         .dark-mode .category-label {
@@ -353,16 +363,17 @@
         .remove-button {
             background: none;
             border: none;
-            font-size: 1.4rem;
+            font-size: 1.6rem;
             cursor: pointer;
             opacity: 0.5;
             transition: opacity 0.2s;
-            width: 32px;
-            height: 32px;
+            width: 36px;
+            height: 36px;
             display: flex;
             align-items: center;
             justify-content: center;
             border-radius: 50%;
+            color: inherit;
         }
 
         .remove-button:hover {
@@ -370,31 +381,39 @@
             background: rgba(255, 0, 0, 0.1);
         }
 
-        /* Футер */
         .app-footer {
             display: flex;
             justify-content: space-between;
             align-items: center;
-            padding: 15px 0;
-            font-size: 0.95rem;
+            padding: 18px 20px;
+            font-size: 1rem;
+            background: var(--box-light);
+            margin: 0 15px;
+            border-radius: 16px;
+            box-shadow: var(--shadow);
+        }
+
+        .dark-mode .app-footer {
+            background: var(--box-dark);
         }
 
         .clear-button {
             background: var(--accent);
             color: white;
             border: none;
-            padding: 8px 16px;
-            border-radius: 6px;
+            padding: 10px 20px;
+            border-radius: 8px;
             cursor: pointer;
             font-weight: 500;
             transition: background 0.2s;
+            font-family: inherit;
+            font-size: 0.95rem;
         }
 
         .clear-button:hover {
             background: #e55a5a;
         }
 
-        /* Ассистент-котик */
         .assistant-container {
             position: fixed;
             bottom: 25px;
@@ -409,12 +428,14 @@
         .assistant-message {
             background-color: var(--vk-blue);
             color: white;
-            padding: 12px 18px;
-            border-radius: 18px;
-            box-shadow: var(--shadow);
-            max-width: 250px;
+            padding: 14px 20px;
+            border-radius: 20px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+            max-width: 280px;
             animation: fadeIn 0.4s ease-out;
             position: relative;
+            font-size: 1rem;
+            line-height: 1.4;
         }
 
         .assistant-message::after {
@@ -429,26 +450,27 @@
 
         .emoji {
             margin-right: 8px;
+            font-size: 1.2em;
         }
 
         .cat-assistant {
-            width: 80px;
-            height: 80px;
-            background: #ffd166;
+            width: 85px;
+            height: 85px;
+            background: linear-gradient(135deg, #ffd166, #ffb347);
             border-radius: 50%;
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 50px;
+            font-size: 55px;
             cursor: pointer;
-            box-shadow: var(--shadow);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
             transition: transform 0.3s, background 0.3s;
             position: relative;
             overflow: hidden;
         }
 
         .cat-assistant:hover {
-            transform: scale(1.05);
+            transform: scale(1.08);
         }
 
         .cat-assistant.celebrating {
@@ -461,14 +483,14 @@
 
         .cat-eyes {
             position: absolute;
-            top: 30%;
+            top: 32%;
             display: flex;
-            gap: 15px;
+            gap: 18px;
         }
 
         .cat-eye {
-            width: 8px;
-            height: 12px;
+            width: 10px;
+            height: 14px;
             background: #333;
             border-radius: 50%;
         }
@@ -476,10 +498,10 @@
         .cat-mouth {
             position: absolute;
             top: 55%;
-            width: 20px;
-            height: 8px;
+            width: 24px;
+            height: 10px;
             background: #333;
-            border-radius: 0 0 10px 10px;
+            border-radius: 0 0 12px 12px;
         }
 
         @keyframes fadeIn {
@@ -489,47 +511,24 @@
 
         @keyframes celebrate {
             0%, 100% { transform: translateY(0) rotate(0); }
-            25% { transform: translateY(-10px) rotate(-5deg); }
+            25% { transform: translateY(-12px) rotate(-8deg); }
             50% { transform: translateY(0) rotate(0); }
-            75% { transform: translateY(-10px) rotate(5deg); }
+            75% { transform: translateY(-12px) rotate(8deg); }
         }
 
         @keyframes sleeping {
             0%, 100% { transform: rotate(0); }
-            25% { transform: rotate(5deg); }
-            75% { transform: rotate(-5deg); }
+            25% { transform: rotate(8deg); }
+            75% { transform: rotate(-8deg); }
         }
 
-        /* Адаптивность */
-        @media (max-width: 600px) {
-            #app {
-                padding: 15px;
-            }
-            
-            .todo-form {
-                flex-direction: column;
-            }
-            
-            .assistant-container {
-                bottom: 15px;
-                right: 15px;
-            }
-            
-            .cat-assistant {
-                width: 65px;
-                height: 65px;
-                font-size: 40px;
-            }
-        }
-
-        /* Загрузочный экран */
         .loading-screen {
             position: fixed;
             top: 0;
             left: 0;
             width: 100%;
             height: 100%;
-            background: var(--vk-blue);
+            background: linear-gradient(135deg, var(--vk-blue), var(--vk-blue-dark));
             display: flex;
             flex-direction: column;
             justify-content: center;
@@ -537,21 +536,94 @@
             z-index: 10000;
             color: white;
             font-size: 1.2rem;
+            transition: opacity 0.5s;
         }
 
         .spinner {
-            width: 50px;
-            height: 50px;
-            border: 5px solid rgba(255, 255, 255, 0.3);
+            width: 60px;
+            height: 60px;
+            border: 6px solid rgba(255, 255, 255, 0.3);
             border-radius: 50%;
-            border-top: 5px solid white;
+            border-top: 6px solid white;
             animation: spin 1s linear infinite;
-            margin-bottom: 20px;
+            margin-bottom: 25px;
         }
 
         @keyframes spin {
             0% { transform: rotate(0deg); }
             100% { transform: rotate(360deg); }
+        }
+
+        .loading-text {
+            margin-top: 20px;
+            font-size: 1.1rem;
+            opacity: 0.9;
+        }
+
+        .empty-state {
+            text-align: center;
+            padding: 40px 20px;
+            color: #666;
+        }
+
+        .dark-mode .empty-state {
+            color: #999;
+        }
+
+        .empty-icon {
+            font-size: 3.5rem;
+            margin-bottom: 20px;
+            opacity: 0.5;
+        }
+
+        .user-greeting {
+            font-size: 0.95rem;
+            opacity: 0.9;
+            margin-top: 10px;
+        }
+
+        @media (max-width: 600px) {
+            #app {
+                padding: 0 0 70px;
+            }
+            
+            .app-box {
+                margin: 10px;
+                padding: 16px;
+            }
+            
+            .todo-form {
+                flex-direction: column;
+                gap: 12px;
+            }
+            
+            .add-button {
+                padding: 14px;
+            }
+            
+            .assistant-container {
+                bottom: 20px;
+                right: 15px;
+            }
+            
+            .cat-assistant {
+                width: 70px;
+                height: 70px;
+                font-size: 45px;
+            }
+            
+            .app-footer {
+                padding: 15px;
+                margin: 0 10px;
+            }
+            
+            .header {
+                flex-wrap: wrap;
+            }
+            
+            .app-title {
+                font-size: 1.4rem;
+            }
         }
     </style>
 </head>
@@ -559,12 +631,13 @@
     <div class="loading-screen" id="loading-screen">
         <div class="spinner"></div>
         <p>Загрузка приложения...</p>
+        <div class="loading-text">Пожалуйста, подождите</div>
     </div>
     
     <div id="app" style="display: none;">
         <div class="vk-header">
             <div class="header">
-                <h1 class="app-title">Life Leveler 🐱</h1>
+                <h1 class="app-title">🐱 Life Leveler</h1>
                 <div class="header-actions">
                     <div class="streak">
                         <span class="streak-icon">🔥</span>
@@ -577,7 +650,7 @@
         
         <div class="app-box">
             <form class="todo-form" id="todo-form">
-                <input type="text" class="todo-input" id="task-input" placeholder="Новая задача..." required>
+                <input type="text" class="todo-input" id="task-input" placeholder="Новая задача..." required autocomplete="off">
                 <select class="category-select" id="category-select">
                     <!-- Категории будут добавлены через JS -->
                 </select>
@@ -684,31 +757,70 @@
         // Инициализация приложения с VK Bridge
         async function initVKApp() {
             try {
-                // Инициализация VK Bridge
+                // 1. Инициализация VK Bridge
                 await vkBridge.send('VKWebAppInit');
                 
-                // Получение информации о пользователе
-                const user = await vkBridge.send('VKWebAppGetUserInfo');
-                state.vkUser = user;
+                // 2. Получение информации о пользователе
+                try {
+                    const user = await vkBridge.send('VKWebAppGetUserInfo');
+                    state.vkUser = user;
+                } catch (userError) {
+                    console.log('Не удалось получить информацию о пользователе:', userError);
+                }
                 
-                // Получение параметров запуска
-                const launchParams = await vkBridge.send('VKWebAppGetLaunchParams');
+                // 3. Получение параметров запуска
+                try {
+                    const launchParams = await vkBridge.send('VKWebAppGetLaunchParams');
+                    console.log('Параметры запуска:', launchParams);
+                } catch (paramsError) {
+                    console.log('Не удалось получить параметры запуска:', paramsError);
+                }
                 
-                // Определение темы приложения
-                const config = await vkBridge.send('VKWebAppGetConfig');
-                state.darkMode = config.appearance === 'dark';
+                // 4. Определение темы приложения
+                try {
+                    const config = await vkBridge.send('VKWebAppGetConfig');
+                    state.darkMode = config.appearance === 'dark';
+                    
+                    // Подписка на изменение темы
+                    vkBridge.subscribe((e) => {
+                        if (e.detail.type === 'VKWebAppThemeChanged') {
+                            state.darkMode = e.detail.data.scheme === 'dark';
+                            updateUI();
+                        }
+                    });
+                } catch (themeError) {
+                    console.log('Не удалось получить тему:', themeError);
+                    state.darkMode = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
+                }
+                
+                // 5. Загрузка данных из VK Storage
+                try {
+                    const storageData = await vkBridge.send('VKWebAppStorageGet', {
+                        keys: ['lifeLevelerState']
+                    });
+                    
+                    if (storageData.keys && storageData.keys.length > 0) {
+                        const savedState = JSON.parse(storageData.keys[0].value);
+                        state = {...state, ...savedState};
+                    }
+                } catch (storageError) {
+                    console.log('Не удалось загрузить данные из хранилища:', storageError);
+                }
                 
                 // Инициализация приложения
                 initApp();
                 
                 // Приветственное сообщение
                 setTimeout(() => {
-                    showAssistantMessage('vkWelcome');
+                    showAssistantMessage(state.vkUser ? 'vkWelcome' : 'welcome');
                 }, 1000);
                 
+                // Отправка события аналитики
+                sendAnalyticsEvent('App launched');
+                
             } catch (error) {
-                console.error('VK Bridge error:', error);
-                // Запасной вариант, если VK Bridge недоступен
+                console.error('Ошибка VK Bridge:', error);
+                // Запасной вариант
                 state.darkMode = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
                 initApp();
                 showAssistantMessage('welcome');
@@ -717,7 +829,6 @@
 
         // Инициализация приложения
         function initApp() {
-            loadState();
             setupEventListeners();
             renderCategories();
             renderTodos();
@@ -725,31 +836,11 @@
             checkNewDay();
             
             // Показываем приложение и скрываем экран загрузки
-            dom.loadingScreen.style.display = 'none';
-            dom.app.style.display = 'block';
-        }
-
-        // Загрузка состояния из localStorage
-        function loadState() {
-            const savedState = localStorage.getItem('lifeLevelerState');
-            if (savedState) {
-                try {
-                    state = JSON.parse(savedState);
-                    
-                    // Проверяем, наступил ли новый день
-                    checkNewDay();
-                    
-                    // Обновляем UI после загрузки состояния
-                    updateUI();
-                } catch (e) {
-                    console.error('Failed to parse saved state', e);
-                }
-            }
-        }
-
-        // Сохранение состояния в localStorage
-        function saveState() {
-            localStorage.setItem('lifeLevelerState', JSON.stringify(state));
+            dom.loadingScreen.style.opacity = '0';
+            setTimeout(() => {
+                dom.loadingScreen.style.display = 'none';
+                dom.app.style.display = 'block';
+            }, 500);
         }
 
         // Проверка наступления нового дня
@@ -765,6 +856,7 @@
                     
                     if (diffDays > 1) {
                         state.streak = 0;
+                        sendAnalyticsEvent('Streak reset');
                     }
                 }
                 
@@ -790,6 +882,7 @@
             // Клик по котику
             dom.catAssistant.addEventListener('click', () => {
                 showAssistantMessage('welcome');
+                sendAnalyticsEvent('Assistant clicked');
             });
             
             // Автоматическое обновление прогресса в полночь
@@ -799,9 +892,9 @@
         // Переключение темной темы
         function toggleDarkMode() {
             state.darkMode = !state.darkMode;
-            document.body.classList.toggle('dark-mode', state.darkMode);
-            dom.themeToggle.textContent = state.darkMode ? '☀️' : '🌙';
+            updateUI();
             saveState();
+            sendAnalyticsEvent('Theme changed', { theme: state.darkMode ? 'dark' : 'light' });
         }
 
         // Добавление задачи
@@ -813,10 +906,11 @@
             
             if (taskText) {
                 const newTask = {
-                    id: Date.now(), // Используем временную метку как ID
+                    id: Date.now(),
                     task: sanitizeInput(taskText),
                     completed: false,
-                    category: category
+                    category: category,
+                    createdAt: new Date().toISOString()
                 };
                 
                 state.todos.push(newTask);
@@ -824,6 +918,9 @@
                 renderTodos();
                 updateUI();
                 showAssistantMessage('taskAdded');
+                
+                // Отправка события аналитики
+                sendAnalyticsEvent('Task added', { category: category });
                 
                 // Сброс формы
                 dom.taskInput.value = '';
@@ -833,9 +930,12 @@
 
         // Санитизация пользовательского ввода
         function sanitizeInput(input) {
-            const div = document.createElement('div');
-            div.textContent = input;
-            return div.innerHTML;
+            return input
+                .replace(/&/g, '&amp;')
+                .replace(/</g, '&lt;')
+                .replace(/>/g, '&gt;')
+                .replace(/"/g, '&quot;')
+                .replace(/'/g, '&#039;');
         }
 
         // Переключение статуса задачи
@@ -859,8 +959,11 @@
                     showAssistantMessage('dailyGoalComplete');
                     celebrateCat();
                     
+                    // Отправка события аналитики
+                    sendAnalyticsEvent('Daily goal completed');
+                    
                     // Показ VK-уведомления при достижении цели
-                    showVKNotification('Поздравляем! 🎉 Вы достигли дневной цели!');
+                    showVKNotification('🎉 Поздравляем! Вы достигли дневной цели!');
                 } else {
                     showAssistantMessage('taskCompleted');
                 }
@@ -868,6 +971,7 @@
                 // Проверяем, выполнены ли все задачи
                 if (state.todos.every(t => t.completed)) {
                     showAssistantMessage('allCompleted');
+                    sendAnalyticsEvent('All tasks completed');
                 }
             } else {
                 state.completedToday = Math.max(0, state.completedToday - 1);
@@ -879,25 +983,47 @@
             saveState();
             renderTodos();
             updateUI();
+            
+            // Отправка события аналитики
+            sendAnalyticsEvent('Task toggled', { 
+                completed: task.completed, 
+                category: task.category 
+            });
         }
 
         // Удаление задачи
         function removeTask(id) {
-            state.todos = state.todos.filter(t => t.id !== id);
+            const taskIndex = state.todos.findIndex(t => t.id === id);
+            if (taskIndex === -1) return;
+            
+            const task = state.todos[taskIndex];
+            state.todos.splice(taskIndex, 1);
+            
             saveState();
             renderTodos();
             updateUI();
+            
+            // Отправка события аналитики
+            sendAnalyticsEvent('Task removed', { 
+                category: task.category 
+            });
         }
 
         // Очистка выполненных задач
         function clearCompleted() {
-            if (state.todos.some(t => t.completed)) {
-                state.todos = state.todos.filter(t => !t.completed);
-                saveState();
-                renderTodos();
-                updateUI();
-                showAssistantMessage('clearCompleted');
-            }
+            const completedTasks = state.todos.filter(t => t.completed);
+            if (completedTasks.length === 0) return;
+            
+            state.todos = state.todos.filter(t => !t.completed);
+            saveState();
+            renderTodos();
+            updateUI();
+            showAssistantMessage('clearCompleted');
+            
+            // Отправка события аналитики
+            sendAnalyticsEvent('Completed tasks cleared', { 
+                count: completedTasks.length 
+            });
         }
 
         // Показать уведомление через VK Bridge
@@ -907,6 +1033,41 @@
             }).catch(error => {
                 console.error('Ошибка показа уведомления:', error);
             });
+        }
+
+        // Отправка события аналитики
+        function sendAnalyticsEvent(eventName, eventParams = {}) {
+            if (!vkBridge.supports('VKWebAppEvent')) return;
+            
+            try {
+                vkBridge.send('VKWebAppEvent', {
+                    event_name: eventName,
+                    event_data: JSON.stringify(eventParams)
+                });
+            } catch (error) {
+                console.error('Ошибка отправки аналитики:', error);
+            }
+        }
+
+        // Сохранение состояния в VK Storage
+        async function saveState() {
+            try {
+                await vkBridge.send('VKWebAppStorageSet', {
+                    key: 'lifeLevelerState',
+                    value: JSON.stringify({
+                        todos: state.todos,
+                        darkMode: state.darkMode,
+                        currentCategory: state.currentCategory,
+                        completedToday: state.completedToday,
+                        streak: state.streak,
+                        lastCompletedDate: state.lastCompletedDate
+                    })
+                });
+            } catch (error) {
+                console.error('Ошибка сохранения состояния:', error);
+                // Запасной вариант - localStorage
+                localStorage.setItem('lifeLevelerState', JSON.stringify(state));
+            }
         }
 
         // Рендер категорий
@@ -935,6 +1096,7 @@
                     state.currentCategory = category.id;
                     saveState();
                     renderTodos();
+                    sendAnalyticsEvent('Category selected', { category: category.id });
                 });
                 dom.categoriesFilter.appendChild(button);
             });
@@ -945,6 +1107,7 @@
                 const option = document.createElement('option');
                 option.value = category.id;
                 option.textContent = category.name;
+                option.style.backgroundColor = category.color + '20';
                 dom.categorySelect.appendChild(option);
             });
         }
@@ -960,12 +1123,16 @@
                 : state.todos.filter(t => t.category === state.currentCategory);
             
             if (filteredTodos.length === 0) {
-                const emptyMessage = document.createElement('div');
-                emptyMessage.className = 'empty-message';
-                emptyMessage.textContent = state.todos.length === 0 
-                    ? 'Задач пока нет. Добавьте свою первую задачу!'
-                    : 'Нет задач в этой категории';
-                dom.todosContainer.appendChild(emptyMessage);
+                const emptyElement = document.createElement('div');
+                emptyElement.className = 'empty-state';
+                emptyElement.innerHTML = `
+                    <div class="empty-icon">📝</div>
+                    <div>${state.todos.length === 0 
+                        ? 'Задач пока нет. Добавьте свою первую задачу!' 
+                        : 'Нет задач в этой категории'}</div>
+                    ${state.vkUser ? `<div class="user-greeting">Привет, ${state.vkUser.first_name}!</div>` : ''}
+                `;
+                dom.todosContainer.appendChild(emptyElement);
                 return;
             }
             
@@ -983,7 +1150,7 @@
                         <input type="checkbox" class="todo-checkbox" ${todo.completed ? 'checked' : ''}>
                         <div class="todo-text">${todo.task}</div>
                     </div>
-                    <div class="category-label">${category.name}</div>
+                    <div class="category-label" style="color: ${category.color}">${category.name}</div>
                     <button class="remove-button">×</button>
                 `;
                 
@@ -998,7 +1165,7 @@
             });
         }
 
-        // Обновление UI (прогресс, стрик, итог)
+        // Обновление UI
         function updateUI() {
             // Прогресс
             const progressPercent = (state.completedToday / DAILY_GOAL) * 100;
@@ -1062,7 +1229,7 @@
             
             setTimeout(() => {
                 checkNewDay();
-                setMidnightReset(); // Запланировать следующий сброс
+                setMidnightReset();
             }, timeout);
         }
 
